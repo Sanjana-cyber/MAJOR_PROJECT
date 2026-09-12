@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const initdata=require("../data.js");
+const initdata=require("./data.js");
 const Listing=require("../MODELS/listing.js");
 
 

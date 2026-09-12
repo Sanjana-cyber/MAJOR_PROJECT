@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wonderlust</title>
+</head>
+<BODY>
+<form   method="POST"action="/listing/<%= detail._id %>/update?_method=PUT">
+    <input type="text"name="listing[title]" value="<%=detail.title%>">
+    <br><br>
+    <textarea name="listing[description]" > <%=detail.description%></textarea>
+    <br><br>
+     <input type="number"name="listing[price]" value="<%=detail.price%>">
+    <br><br>
+     <input type="text"name="listing[location]" value="<%=detail.location%>">
+    <br><br>
+    
+     <input type="text"name="listing[country]"  value="<%=detail.country%>">
+    <br><br>
+
+    <button> SUBMIT</button>
+   </form>
+   </BODY>
+</html>

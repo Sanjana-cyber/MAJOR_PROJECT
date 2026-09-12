@@ -24,5 +24,17 @@
         <%= detail.country%>
         </li>
     </ul>
+   <form  method="GET" action="/listing/<%= detail._id%>/edit">
+     <button>
+    EDIT
+   </button>
+
+  </form>
+  <br>
+  <form   method="POST"action="/listing/<%= detail._id %>?_method=DELETE">
+    <button>
+    DELETE
+   </button>
+  </form>
 </body>
 </html>
