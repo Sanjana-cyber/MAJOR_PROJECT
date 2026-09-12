@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust</title>
+</head>
+<body>
+    
+    <h3>ALL LISTINGS</h3>
+    <ul>
+    <% for(list of allList){%>
+      <li><a href="http://localhost:8080/listing/<%=list._id%>"><%= list.title %></li></a>
+      
+    <%} %>
+    </ul>
+</body>
+</html>
