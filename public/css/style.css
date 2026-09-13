@@ -1,0 +1,11 @@
+.navbar{
+    height: 4rem;
+    background-color: white;
+}
+.nav-link{
+    color:black!important;
+}
+    
+.home-icon {
+    color: red;
+}

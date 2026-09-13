@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wonderlust</title>
-</head>
+<% layout('/layout/boilerplate') -%>
 <body>
    <form method="POST" action="/listing/new">
     <input type="text"name="listing[title]" placeholder="enter  your title">
@@ -20,7 +14,6 @@
      <input type="text"name="listing[country]" placeholder="enter  your country">
     <br><br>
 
-    <button> submit</button>
+    <button>ADD</button>
    </form>
 </body>
-</html>

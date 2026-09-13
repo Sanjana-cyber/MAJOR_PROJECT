@@ -1,8 +1,16 @@
 const express=require("express");
+const engine = require('ejs-mate');
+
+const path = require('path');
+
 const app=express();
 const mongoose=require("mongoose");
 const methodOverride = require('method-override');
-const Listing=require("./MODELS/listing")
+const Listing=require("./MODELS/listing");
+app.use(express.static(path.join(__dirname, 'public'))); 
+
+// use ejs-locals for all ejs templates:
+app.engine('ejs', engine);
 
 app.set("view engine","ejs");
  app.use(express.urlencoded({extended :true}));
