@@ -1,17 +1,112 @@
 <% layout('/layout/boilerplate') -%>
-<form   method="POST"action="/listing/<%= detail._id %>/update?_method=PUT">
-    <input type="text"name="listing[title]" value="<%=detail.title%>">
-    <br><br>
-    <textarea name="listing[description]" > <%=detail.description%></textarea>
-    <br><br>
-     <input type="number"name="listing[price]" value="<%=detail.price%>">
-    <br><br>
-     <input type="text"name="listing[location]" value="<%=detail.location%>">
-    <br><br>
-    
-     <input type="text"name="listing[country]"  value="<%=detail.country%>">
-    <br><br>
 
-    <button> SUBMIT</button>
-   </form>
-   </BODY>
+<div class="create-listing-page">
+
+    <div class="create-listing-form">
+
+        <h2>Edit Listing</h2>
+        <p class="form-subtitle">Update the details of your property</p>
+
+        <form method="POST" action="/listing/<%= detail._id %>/update?_method=PUT">
+
+            <!-- Title -->
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+
+                <input
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    name="listing[title]"
+                    value="<%= detail.title %>"
+                    required
+                >
+            </div>
+
+
+            <!-- Description -->
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+
+                <textarea
+                    class="form-control"
+                    id="description"
+                    name="listing[description]"
+                    rows="4"
+                ><%= detail.description %></textarea>
+            </div>
+
+
+            <!-- Price -->
+
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+
+                <div class="input-group">
+
+                    <span class="input-group-text">&#8377;</span>
+
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="price"
+                        name="listing[price]"
+                        value="<%= detail.price %>"
+                        required
+                    >
+
+                </div>
+            </div>
+
+
+            <!-- Location + Country -->
+
+            <div class="location-country">
+
+                <div>
+                    <label for="location" class="form-label">
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="location"
+                        name="listing[location]"
+                        value="<%= detail.location %>"
+                        required
+                    >
+                </div>
+
+
+                <div>
+                    <label for="country" class="form-label">
+                        Country
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="country"
+                        name="listing[country]"
+                        value="<%= detail.country %>"
+                        required
+                    >
+                </div>
+
+            </div>
+
+
+            <!-- Submit -->
+
+            <button type="submit" class="add-listing-btn">
+               UPDATE
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
