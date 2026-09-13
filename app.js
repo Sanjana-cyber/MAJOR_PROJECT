@@ -36,11 +36,13 @@ app.get("/", (req,res)=>{
 })
 
 //show all  route
-app.get("/listing",async (req,res)=>{
-    let allList=  await Listing.find({});
-    res.render("listing",{allList});
+app.get("/listing", async (req, res) => {
+    let allList = await Listing.find({});
 
-})
+   
+
+    res.render("listing", { allList });
+});
 
 //create route
 app.get("/listing/new",(req,res)=>{

@@ -20,7 +20,7 @@ main()
     console.log(err)
 })
 
-//inserion data in database
+//insertion data in database
 const initDB=async ()=>{
      await Listing.deleteMany({});
       await Listing.insertMany(initdata.data);

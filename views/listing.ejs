@@ -1,13 +1,45 @@
 <% layout('/layout/boilerplate') -%>
+
 <body>
-    
-    <h3>ALL LISTINGS</h3>
-    <ul>
-    <% for(list of allList){%>
-      <li><a href="http://localhost:8080/listing/<%=list._id%>"><%= list.title %></li></a>
-      
-    <%} %>
-    </ul>
-   
-    
+
+    <h3 class="all-listings-heading">ALL LISTINGS</h3>
+
+    <div class="listings-container">
+
+        <% for(let list of allList) { %>
+
+            <a href="/listing/<%= list._id %>" class="listing-link">
+
+                <div class="card listing-card">
+
+                    <div class="listing-image-container">
+                        <img
+                            src="<%= list.image.url %>"
+                            class="card-img-top listing-image"
+                            alt="card of property"
+                        >
+
+                        <div class="image-overlay"></div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <h5 class="listing-title">
+                            <%= list.title %>
+                        </h5>
+
+                        <p class="listing-price">
+                            &#8377;<%= list.price.toLocaleString("en-IN") %>
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        <% } %>
+
+    </div>
+
 </body>

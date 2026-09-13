@@ -1,19 +1,92 @@
 <% layout('/layout/boilerplate') -%>
-<body>
-   <form method="POST" action="/listing/new">
-    <input type="text"name="listing[title]" placeholder="enter  your title">
-    <br><br>
-    <textarea name="listing[description]" placeholder="enter ur description"></textarea>
-    <br><br>
-     <input type="number"name="listing[price]" placeholder="enter  your price">
-    <br><br>
-     <input type="text"name="listing[location]" placeholder="enter  your location">
-    <br><br>
-     <input type="text"name="listing[image]" placeholder="enter  your image url/link">
-    <br><br>
-     <input type="text"name="listing[country]" placeholder="enter  your country">
-    <br><br>
 
-    <button>ADD</button>
-   </form>
-</body>
+<div class="create-listing-page">
+
+    <div class="create-listing-form">
+
+        <h2>Add New Listings</h2>
+        <p class="form-subtitle">Add the details of your property</p>
+
+        <form method="POST" action="/listing/new">
+
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    name="listing[title]"
+                    placeholder="Enter your property title"
+                    required
+                >
+            </div>
+
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea
+                    class="form-control"
+                    id="description"
+                    name="listing[description]"
+                    rows="4"
+                    placeholder="Tell us about your property"
+                ></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <div class="input-group">
+                    <span class="input-group-text">&#8377;</span>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="price"
+                        name="listing[price]"
+                        placeholder="Enter price per night"
+                        required
+                    >
+                </div>
+            </div>
+<div class="location-country">
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="location"
+                    name="listing[location]"
+                    placeholder="Enter property location"
+                    required
+                >
+            </div>
+
+            <div class="mb-3">
+                <label for="country" class="form-label">Country</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="country"
+                    name="listing[country]"
+                    placeholder="Enter country"
+                    required
+                >
+            </div>
+            </div>
+
+            <div class="mb-4">
+                <label for="image" class="form-label">Property Image</label>
+                <input
+                    type="text"
+                    class="form-control"
+                    id="image"
+                    name="listing[image][url]"
+                    placeholder="Paste your image URL"
+                >
+            </div>
+
+            <button type="submit" class="add-listing-btn">ADD</button>
+
+        </form>
+
+    </div>
+
+</div>
