@@ -1,34 +1,64 @@
+```ejs
 <% layout('/layout/boilerplate') -%>
-<body>
-    <h3> HERE IS THE DETAIL OF YOUR DATA</h3>
-    <ul>
-        <li>
-        <%= detail.title%>
-        </li>
-          <li>
-        <%= detail.description%>
-        </li>
-         <li >&#8377;
-        <%= detail.price.toLocaleString("en-IN")%>
-        </li>
-         <li>
-        <%= detail.location%>
-        </li>
-         <li>
-        <%= detail.country%>
-        </li>
-    </ul>
-   <form  method="GET" action="/listing/<%= detail._id%>/edit">
-     <button>
-    EDIT
-   </button>
 
-  </form>
-  <br>
-  <form   method="POST"action="/listing/<%= detail._id %>?_method=DELETE">
-    <button>
-    DELETE
-   </button>
-  </form>
-</body>
-</html>
+<div class="details-page">
+
+    <h3 class="details-heading">DETAILS</h3>
+
+    <div class="details-card">
+
+        <img 
+            src="<%= detail.image.url %>" 
+            class="details-image" 
+            alt="detail_image"
+        >
+
+        <div class="card-body">
+
+            <h5><%= detail.title %></h5>
+
+            <p class="details-description">
+                <%= detail.description %>
+            </p>
+
+            <ul class="details-list">
+
+                <li>
+                    &#8377; <%= detail.price.toLocaleString("en-IN") %>
+                </li>
+
+                <li>
+                    <%= detail.location %>
+                </li>
+
+                <li>
+                    <%= detail.country %>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="details-buttons">
+
+            <form method="GET" action="/listing/<%= detail._id %>/edit">
+                <button class="edit-btn">
+                    EDIT
+                </button>
+            </form>
+
+            <form 
+                method="POST" 
+                action="/listing/<%= detail._id %>?_method=DELETE"
+            >
+                <button class="delete-btn">
+                    DELETE
+                </button>
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+

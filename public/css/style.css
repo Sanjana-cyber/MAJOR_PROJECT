@@ -434,3 +434,182 @@ body {
     }
 
 }
+/* ================================
+   DETAILS PAGE
+================================ */
+
+.details-page {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 35px 20px;
+}
+
+/* Details heading */
+
+.details-heading {
+    color: var(--main-red);
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Details card */
+
+.details-card {
+    width: 400px;
+    max-width: 100%;
+    border: none;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.10);
+}
+
+/* Image */
+
+.details-card .details-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Card body */
+
+.details-card .card-body {
+    padding: 25px;
+    text-align: center;
+}
+
+/* Title */
+
+.details-card h5 {
+    color: var(--main-red);
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+/* Description */
+
+.details-card .details-description {
+    color: var(--text-color);
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 18px;
+}
+
+/* Details list */
+
+.details-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.details-list li {
+    color: var(--main-red);
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+/* Buttons container */
+
+.details-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding: 0 25px 25px;
+}
+
+/* Common button style */
+
+.details-buttons button {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 8px;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+/* Edit button - Red */
+
+.edit-btn {
+    background-color: var(--main-red);
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: rgb(190, 30, 30);
+}
+
+/* Delete button - Black */
+
+.delete-btn {
+    background-color: black;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #333;
+}
+
+
+/* ================================
+   DETAILS RESPONSIVE
+================================ */
+
+@media (max-width: 768px) {
+
+    .details-card {
+        width: 90%;
+    }
+
+    .details-card .details-image {
+        height: 250px;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .details-page {
+        padding: 25px 15px;
+    }
+
+    .details-heading {
+        font-size: 23px;
+    }
+
+    .details-card {
+        width: 100%;
+    }
+
+    .details-card .details-image {
+        height: 200px;
+    }
+
+    .details-card .card-body {
+        padding: 20px 15px;
+    }
+
+    .details-buttons {
+        padding: 0 15px 20px;
+    }
+
+    .details-buttons button {
+        padding: 9px 20px;
+    }
+
+}
