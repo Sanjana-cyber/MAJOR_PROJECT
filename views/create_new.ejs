@@ -7,7 +7,7 @@
         <h2>Add New Listings</h2>
         <p class="form-subtitle">Add the details of your property</p>
 
-        <form method="POST" action="/listing/new">
+       <form method="POST" action="/listing/new" class="needs-validation" novalidate>
 
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
@@ -19,6 +19,10 @@
                     placeholder="Enter your property title"
                     required
                 >
+                  
+      <div class="invalid-feedback">
+       Please enter the  detail
+      </div>
             </div>
 
             <div class="mb-3">
@@ -29,7 +33,11 @@
                     name="listing[description]"
                     rows="4"
                     placeholder="Tell us about your property"
+                    required
                 ></textarea>
+                   <div class="invalid-feedback">
+       Please enter the  detail
+      </div>
             </div>
 
             <div class="mb-3">
@@ -44,6 +52,9 @@
                         placeholder="Enter price per night"
                         required
                     >
+                       <div class="invalid-feedback">
+       Please enter the  detail
+      </div>
                 </div>
             </div>
 <div class="location-country">
@@ -57,6 +68,9 @@
                     placeholder="Enter property location"
                     required
                 >
+                   <div class="invalid-feedback">
+       Please enter the  detail
+      </div>
             </div>
 
             <div class="mb-3">
@@ -69,6 +83,9 @@
                     placeholder="Enter country"
                     required
                 >
+                   <div class="invalid-feedback">
+       Please enter the  detail
+      </div>
             </div>
             </div>
 
@@ -80,7 +97,11 @@
                     id="image"
                     name="listing[image][url]"
                     placeholder="Paste your image URL"
+                    required
                 >
+                   <div class="invalid-feedback">
+       Please enter the  detail
+      </div>
             </div>
 
             <button type="submit" class="add-listing-btn">ADD</button>

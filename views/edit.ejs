@@ -1,3 +1,4 @@
+```ejs
 <% layout('/layout/boilerplate') -%>
 
 <div class="create-listing-page">
@@ -7,12 +8,14 @@
         <h2>Edit Listing</h2>
         <p class="form-subtitle">Update the details of your property</p>
 
-        <form method="POST" action="/listing/<%= detail._id %>/update?_method=PUT">
+        <form method="POST" action="/listing/<%= detail._id %>/update?_method=PUT" class="needs-validation" novalidate>
 
             <!-- Title -->
 
             <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
+                <label for="title" class="form-label">
+                    Title <span class="required-star">*</span>
+                </label>
 
                 <input
                     type="text"
@@ -22,27 +25,40 @@
                     value="<%= detail.title %>"
                     required
                 >
+
+                <div class="invalid-feedback">
+                    Please enter the detail
+                </div>
             </div>
 
 
             <!-- Description -->
 
             <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
+                <label for="description" class="form-label">
+                    Description <span class="required-star">*</span>
+                </label>
 
                 <textarea
                     class="form-control"
                     id="description"
                     name="listing[description]"
                     rows="4"
+                    required
                 ><%= detail.description %></textarea>
+
+                <div class="invalid-feedback">
+                    Please enter the detail
+                </div>
             </div>
 
 
             <!-- Price -->
 
             <div class="mb-3">
-                <label for="price" class="form-label">Price</label>
+                <label for="price" class="form-label">
+                    Price <span class="required-star">*</span>
+                </label>
 
                 <div class="input-group">
 
@@ -57,6 +73,10 @@
                         required
                     >
 
+                    <div class="invalid-feedback">
+                        Please enter the detail
+                    </div>
+
                 </div>
             </div>
 
@@ -67,7 +87,7 @@
 
                 <div>
                     <label for="location" class="form-label">
-                        Location
+                        Location <span class="required-star">*</span>
                     </label>
 
                     <input
@@ -78,12 +98,16 @@
                         value="<%= detail.location %>"
                         required
                     >
+
+                    <div class="invalid-feedback">
+                        Please enter the detail
+                    </div>
                 </div>
 
 
                 <div>
                     <label for="country" class="form-label">
-                        Country
+                        Country <span class="required-star">*</span>
                     </label>
 
                     <input
@@ -94,6 +118,10 @@
                         value="<%= detail.country %>"
                         required
                     >
+
+                    <div class="invalid-feedback">
+                        Please enter the detail
+                    </div>
                 </div>
 
             </div>
@@ -102,7 +130,7 @@
             <!-- Submit -->
 
             <button type="submit" class="add-listing-btn">
-               UPDATE
+                UPDATE
             </button>
 
         </form>
@@ -110,3 +138,4 @@
     </div>
 
 </div>
+```

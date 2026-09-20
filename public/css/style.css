@@ -613,3 +613,7 @@ body {
     }
 
 }
+.required-star {
+    color: red;
+    font-weight: bold;
+}
