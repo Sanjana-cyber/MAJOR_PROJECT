@@ -12,7 +12,10 @@ const listingSchema= new schema({
         filename: String,
         url:String }
         ,
-        price:Number,
+      price: {
+    type: Number,
+    required: true
+},
     location:String,
     country:String
 });

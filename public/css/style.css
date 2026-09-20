@@ -434,6 +434,8 @@ body {
     }
 
 }
+
+
 /* ================================
    DETAILS PAGE
 ================================ */
@@ -446,6 +448,7 @@ body {
     padding: 35px 20px;
 }
 
+
 /* Details heading */
 
 .details-heading {
@@ -456,6 +459,7 @@ body {
     margin-bottom: 25px;
     text-align: center;
 }
+
 
 /* Details card */
 
@@ -469,6 +473,7 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.10);
 }
 
+
 /* Image */
 
 .details-card .details-image {
@@ -478,12 +483,14 @@ body {
     display: block;
 }
 
+
 /* Card body */
 
 .details-card .card-body {
     padding: 25px;
     text-align: center;
 }
+
 
 /* Title */
 
@@ -495,6 +502,7 @@ body {
     margin-bottom: 12px;
 }
 
+
 /* Description */
 
 .details-card .details-description {
@@ -504,6 +512,7 @@ body {
     font-weight: 400;
     margin-bottom: 18px;
 }
+
 
 /* Details list */
 
@@ -521,6 +530,7 @@ body {
     margin-bottom: 8px;
 }
 
+
 /* Buttons container */
 
 .details-buttons {
@@ -529,6 +539,7 @@ body {
     gap: 12px;
     padding: 0 25px 25px;
 }
+
 
 /* Common button style */
 
@@ -543,6 +554,7 @@ body {
     transition: 0.3s ease;
 }
 
+
 /* Edit button - Red */
 
 .edit-btn {
@@ -553,6 +565,7 @@ body {
 .edit-btn:hover {
     background-color: rgb(190, 30, 30);
 }
+
 
 /* Delete button - Black */
 
@@ -613,7 +626,56 @@ body {
     }
 
 }
+
+
+/* ================================
+   REQUIRED FIELD
+================================ */
+
 .required-star {
     color: red;
     font-weight: bold;
+}
+
+
+/* ================================
+   PAGE LAYOUT
+================================ */
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    margin-top: auto;
+}
+
+
+/* ================================
+   ERROR PAGE
+================================ */
+
+.error-page {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+}
+
+.error-box {
+    width: 60%;
+}
+
+
+/* Error page responsive */
+
+@media (max-width: 768px) {
+
+    .error-box {
+        width: 90%;
+    }
+
 }

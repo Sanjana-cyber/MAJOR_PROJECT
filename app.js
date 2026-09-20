@@ -1,161 +1,174 @@
-const express=require("express");
-const engine = require('ejs-mate');
+const express = require("express");
+const engine = require("ejs-mate");
+const path = require("path");
+const app = express();
+const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 
-const path = require('path');
+const Listing = require("./MODELS/listing");
+const wrapAsync = require("./utils/wrapAsync");
+const ExpressError = require("./utils/ExpressError");
 
-const app=express();
-const mongoose=require("mongoose");
-const methodOverride = require('method-override');
-const Listing=require("./MODELS/listing");
-app.use(express.static(path.join(__dirname, 'public'))); 
+app.use(express.static(path.join(__dirname, "public")));
 
-// use ejs-locals for all ejs templates:
-app.engine('ejs', engine);
+app.engine("ejs", engine);
+app.set("view engine", "ejs");
 
-app.set("view engine","ejs");
- app.use(express.urlencoded({extended :true}));
-let MONGO_URL="mongodb+srv://sanjanapandey29256_db_user:QoJAwb4BwzppLA1x@cluster0.bkxjhhl.mongodb.net/?appName=Cluster0"
-app.use(methodOverride('_method'));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
- async function main(){
-await mongoose.connect(MONGO_URL);
+//connection string
+
+let MONGO_URL = "mongodb+srv://sanjanapandey29256_db_user:QoJAwb4BwzppLA1x@cluster0.bkxjhhl.mongodb.net/?appName=Cluster0";
+
+app.use(methodOverride("_method"));
+
+
+// MongoDB connection
+async function main() {
+    await mongoose.connect(MONGO_URL);
 }
 
 main()
-.then(()=>{
-    console.log("mongo db is connected");
-})
+    .then(() => {
+        console.log("mongo db is connected");
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
-.catch((err)=>{
-    console.log(err)
-})
 
-//index route
-app.get("/", (req,res)=>{
-     res.send("hi i am a root");
-})
-
-//show all  route
-app.get("/listing", async (req, res,next) => {
-    try{
-        let allList = await Listing.find({});
-        res.render("listing", { allList });
-    }
-    catch(err){
-        next(err);
-    }
-    
-    
+// Index route
+app.get("/", (req, res) => {
+    res.send("hi i am a root");
 });
 
 
+// Show all route
 
-//create route
-app.get("/listing/new",(req,res)=>{
+
+app.get("/listing", wrapAsync(async (req, res) => {
+
+    let allList = await Listing.find({});
+
+ 
+    res.render("listing", { allList });
+}));
+
+
+// Create new listing page
+app.get("/listing/new", (req, res) => {
     res.render("create_new");
-})
+});
 
-app.post("/listing/new",async(req,res)=>{
-   
-        try {
-         let listing=req.body.listing;
-    let newListing=new Listing(listing);
-     await newListing .save();
-    res.redirect("/listing");
-    } 
-    catch (err) {
-        next(err);
+
+// Create route
+app.post("/listing/new", wrapAsync(async (req, res) => {
+
+    if (!req.body.listing) {
+        throw new ExpressError(400, "Bad request");
     }
 
+    let listing = req.body.listing;
 
-})
+    let newListing = new Listing(listing);
 
-//edit route
-app.get("/listing/:id/edit",async(req,res)=>{
+    await newListing.save();
+  res.status(201).json({
+        message: "Listing created successfully",
+        listing: newListing
+    });
+    // res.redirect("/listing");
 
-      try {
-        let {id}=req.params;
-   let detail= await Listing.findById(id)
-    res.render("edit",{detail});
+}));
 
-    } 
-    catch (err) {
-        next(err);
+
+// Edit route
+app.get("/listing/:id/edit", wrapAsync(async (req, res) => {
+
+    let { id } = req.params;
+
+    let detail = await Listing.findById(id);
+    if (!detail) {
+        throw new ExpressError(404, "Listing not found");
     }
 
-})
+    res.render("edit", { detail });
 
-//update route
+}));
 
-app.put("/listing/:id/update",async(req,res)=>{
-    
-     try {
-    let {id}=req.params;
-    let update= await Listing.findByIdAndUpdate(id,{...req.body.listing});
+
+// Update route
+app.put("/listing/:id/update", wrapAsync(async (req, res) => {
+
+    if (!req.body.listing) {
+        throw new ExpressError(400, "Bad request");
+    }
+
+    let { id } = req.params;
+
+    await Listing.findByIdAndUpdate(
+        id,
+        { ...req.body.listing }
+    );
+
     res.redirect(`/listing/${id}`);
 
-    } 
-    catch (err) {
-        next(err);
-    }
-})
+}));
 
-// /DELETE 
-app.delete("/listing/:id",async(req,res)=>{
-     try {
-    let {id}=req.params;
-    let del= await Listing.findByIdAndDelete(id);
+
+// Delete route
+app.delete("/listing/:id", wrapAsync(async (req, res) => {
+
+    let { id } = req.params;
+
+    let del = await Listing.findByIdAndDelete(id);
+
     res.redirect("/listing");
-     res.render("show", { detail });
 
-    } 
-    catch (err) {
-        next(err);
+}));
+
+
+// Show by ID route
+app.get("/listing/:id", wrapAsync(async (req, res) => {
+
+    let { id } = req.params;
+
+    let detail = await Listing.findById(id);
+    if (!detail) {
+        throw new ExpressError(404, "Listing not found");
     }
-    
 
-})
+    res.render("show", { detail });
 
-//show by id route
-app.get("/listing/:id", async (req, res, next) => {
-    try {
-        let { id } = req.params;
+}));
 
-        let detail = await Listing.findById(id);
-
-        res.render("show", { detail });
-
-    } catch (err) {
-        next(err);
-    }
+//if route doesnot exist
+app.all("/*splat", (req, res, next) => {
+    next(new ExpressError(404, "Page Not Found"));
 });
 
-
-
-
-// app.get("/testListing",async (req,res)=>{
-// let sample =new Listing({
-//         title:"flat",
-//         description:" it is a 2BHK flat",
-//         Image:" ",
-//         price:7000,
-//         location:"Banglore",
-//         country:"India"
-
-//     });
-//     await sample.save();
-//     console.log("data is saved");
-//     res.send("succesfully saved");
-// })
-
-//handling error
+// Error handling middleware
 app.use((err, req, res, next) => {
+
     console.log(err);
 
-    res.status(500).send("Oops!Something went wrong!");
+    let status = err.status || 500;
+    let message;
+
+    if (err instanceof ExpressError) {
+        message = err.message;
+    } else {
+        message = "Something went wrong";
+    }
+
+    res.status(status).render("error", { message });
 });
 
-let port=8080;
-app.listen(port,(res,req)=>{
-    console.log("your app is running on port",port);
-})
+
+// Server
+let port = 8080;
+
+app.listen(port, () => {
+    console.log("your app is running on port", port);
+});
