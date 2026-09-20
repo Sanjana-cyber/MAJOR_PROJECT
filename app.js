@@ -36,13 +36,19 @@ app.get("/", (req,res)=>{
 })
 
 //show all  route
-app.get("/listing", async (req, res) => {
-    let allList = await Listing.find({});
-
-   
-
-    res.render("listing", { allList });
+app.get("/listing", async (req, res,next) => {
+    try{
+        let allList = await Listing.find({});
+        res.render("listing", { allList });
+    }
+    catch(err){
+        next(err);
+    }
+    
+    
 });
+
+
 
 //create route
 app.get("/listing/new",(req,res)=>{
@@ -50,43 +56,79 @@ app.get("/listing/new",(req,res)=>{
 })
 
 app.post("/listing/new",async(req,res)=>{
-    let listing=req.body.listing;
+   
+        try {
+         let listing=req.body.listing;
     let newListing=new Listing(listing);
      await newListing .save();
     res.redirect("/listing");
+    } 
+    catch (err) {
+        next(err);
+    }
+
 
 })
 
 //edit route
 app.get("/listing/:id/edit",async(req,res)=>{
-    let {id}=req.params;
+
+      try {
+        let {id}=req.params;
    let detail= await Listing.findById(id)
     res.render("edit",{detail});
+
+    } 
+    catch (err) {
+        next(err);
+    }
+
 })
 
 //update route
 
 app.put("/listing/:id/update",async(req,res)=>{
+    
+     try {
     let {id}=req.params;
     let update= await Listing.findByIdAndUpdate(id,{...req.body.listing});
-    res.redirect(`/listing/${id}`)
+    res.redirect(`/listing/${id}`);
+
+    } 
+    catch (err) {
+        next(err);
+    }
 })
 
 // /DELETE 
 app.delete("/listing/:id",async(req,res)=>{
+     try {
     let {id}=req.params;
-     let del= await Listing.findByIdAndDelete(id);
+    let del= await Listing.findByIdAndDelete(id);
     res.redirect("/listing");
+     res.render("show", { detail });
+
+    } 
+    catch (err) {
+        next(err);
+    }
+    
 
 })
 
 //show by id route
-app.get("/listing/:id",async(req,res)=>{
-    let {id}=req.params;
-   let detail=await  Listing.findById(id);
-    res.render("show",{detail});
-})
+app.get("/listing/:id", async (req, res, next) => {
+    try {
+        let { id } = req.params;
 
+        let detail = await Listing.findById(id);
+
+        res.render("show", { detail });
+
+    } catch (err) {
+        next(err);
+    }
+});
 
 
 
@@ -105,6 +147,14 @@ app.get("/listing/:id",async(req,res)=>{
 //     console.log("data is saved");
 //     res.send("succesfully saved");
 // })
+
+//handling error
+app.use((err, req, res, next) => {
+    console.log(err);
+
+    res.status(500).send("Oops!Something went wrong!");
+});
+
 let port=8080;
 app.listen(port,(res,req)=>{
     console.log("your app is running on port",port);

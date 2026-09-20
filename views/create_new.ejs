@@ -1,3 +1,4 @@
+
 <% layout('/layout/boilerplate') -%>
 
 <div class="create-listing-page">
@@ -7,10 +8,13 @@
         <h2>Add New Listings</h2>
         <p class="form-subtitle">Add the details of your property</p>
 
-       <form method="POST" action="/listing/new" class="needs-validation" novalidate>
+        <form method="POST" action="/listing/new" class="needs-validation" novalidate>
 
             <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
+                <label for="title" class="form-label">
+                    Title <span class="required-star">*</span>
+                </label>
+
                 <input
                     type="text"
                     class="form-control"
@@ -19,14 +23,18 @@
                     placeholder="Enter your property title"
                     required
                 >
-                  
-      <div class="invalid-feedback">
-       Please enter the  detail
-      </div>
+
+                <div class="invalid-feedback">
+                    Please enter the detail
+                </div>
             </div>
 
+
             <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
+                <label for="description" class="form-label">
+                    Description <span class="required-star">*</span>
+                </label>
+
                 <textarea
                     class="form-control"
                     id="description"
@@ -35,15 +43,22 @@
                     placeholder="Tell us about your property"
                     required
                 ></textarea>
-                   <div class="invalid-feedback">
-       Please enter the  detail
-      </div>
+
+                <div class="invalid-feedback">
+                    Please enter the detail
+                </div>
             </div>
 
+
             <div class="mb-3">
-                <label for="price" class="form-label">Price</label>
+                <label for="price" class="form-label">
+                    Price <span class="required-star">*</span>
+                </label>
+
                 <div class="input-group">
+
                     <span class="input-group-text">&#8377;</span>
+
                     <input
                         type="number"
                         class="form-control"
@@ -52,62 +67,84 @@
                         placeholder="Enter price per night"
                         required
                     >
-                       <div class="invalid-feedback">
-       Please enter the  detail
-      </div>
+
+                    <div class="invalid-feedback">
+                        Please enter the detail
+                    </div>
+
                 </div>
             </div>
-<div class="location-country">
-            <div class="mb-3">
-                <label for="location" class="form-label">Location</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="location"
-                    name="listing[location]"
-                    placeholder="Enter property location"
-                    required
-                >
-                   <div class="invalid-feedback">
-       Please enter the  detail
-      </div>
+
+
+            <div class="location-country">
+
+                <div class="mb-3">
+                    <label for="location" class="form-label">
+                        Location <span class="required-star">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="location"
+                        name="listing[location]"
+                        placeholder="Enter property location"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Please enter the detail
+                    </div>
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="country" class="form-label">
+                        Country <span class="required-star">*</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="country"
+                        name="listing[country]"
+                        placeholder="Enter country"
+                        required
+                    >
+
+                    <div class="invalid-feedback">
+                        Please enter the detail
+                    </div>
+                </div>
+
             </div>
 
-            <div class="mb-3">
-                <label for="country" class="form-label">Country</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    id="country"
-                    name="listing[country]"
-                    placeholder="Enter country"
-                    required
-                >
-                   <div class="invalid-feedback">
-       Please enter the  detail
-      </div>
-            </div>
-            </div>
 
             <div class="mb-4">
-                <label for="image" class="form-label">Property Image</label>
+                <label for="image" class="form-label">
+                    Property Image <span class="required-star">*</span>
+                </label>
+
                 <input
                     type="text"
                     class="form-control"
                     id="image"
                     name="listing[image][url]"
                     placeholder="Paste your image URL"
-                    required
+                  
                 >
-                   <div class="invalid-feedback">
-       Please enter the  detail
-      </div>
+
+                
             </div>
 
-            <button type="submit" class="add-listing-btn">ADD</button>
+
+            <button type="submit" class="add-listing-btn">
+                ADD
+            </button>
 
         </form>
 
     </div>
 
 </div>
+```
