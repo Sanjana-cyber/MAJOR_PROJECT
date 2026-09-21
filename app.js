@@ -37,22 +37,24 @@ main()
     });
 
 
-    //function for validation error handling
-    const validationError=(req,res,next)=>{
-const result= listingSchema.validate(req.body);
-console.log(result);
-   const errMsg=error.details.map((el)=>{
-    el.message
-   });
- if(result.error){ 
-  
-    throw new ExpressError(400, errMsg); 
-}
-else{
-    next();
-}
+    //function for validation error handling for field
+
+    const validationError = (req, res, next) => {
+
+    const result = listingSchema.validate(req.body);
+
+    if (result.error) {
+
+        const errMsg = result.error.details.map(el => el.message);
+
+        throw new ExpressError(400, errMsg);
 
     }
+    else{
+         next();
+    }
+   
+};
 
 // Index route
 app.get("/", (req, res) => {
