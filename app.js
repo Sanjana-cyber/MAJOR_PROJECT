@@ -4,13 +4,12 @@ const path = require("path");
 const app = express();
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
-
 const Listing = require("./MODELS/listing");
 const wrapAsync = require("./utils/wrapAsync");
 const ExpressError = require("./utils/ExpressError");
+const {listingSchema}=require("./schema.js")
 
 app.use(express.static(path.join(__dirname, "public")));
-
 app.engine("ejs", engine);
 app.set("view engine", "ejs");
 
@@ -38,6 +37,23 @@ main()
     });
 
 
+    //function for validation error handling
+    const validationError=(req,res,next)=>{
+const result= listingSchema.validate(req.body);
+console.log(result);
+   const errMsg=error.details.map((el)=>{
+    el.message
+   });
+ if(result.error){ 
+  
+    throw new ExpressError(400, errMsg); 
+}
+else{
+    next();
+}
+
+    }
+
 // Index route
 app.get("/", (req, res) => {
     res.send("hi i am a root");
@@ -63,22 +79,17 @@ app.get("/listing/new", (req, res) => {
 
 
 // Create route
-app.post("/listing/new", wrapAsync(async (req, res) => {
-
-    if (!req.body.listing) {
-        throw new ExpressError(400, "Bad request");
-    }
-
-    let listing = req.body.listing;
-
-    let newListing = new Listing(listing);
-
-    await newListing.save();
-  res.status(201).json({
-        message: "Listing created successfully",
-        listing: newListing
-    });
-    // res.redirect("/listing");
+app.post("/listing/new",
+    validationError,
+ wrapAsync(async (req, res) => {
+ let listing = req.body.listing;
+ let newListing = new Listing(listing);
+await newListing.save();
+//   res.status(201).json({
+//         message: "Listing created successfully",
+//         listing: newListing
+//     });
+    res.redirect("/listing");
 
 }));
 
@@ -99,13 +110,11 @@ app.get("/listing/:id/edit", wrapAsync(async (req, res) => {
 
 
 // Update route
-app.put("/listing/:id/update", wrapAsync(async (req, res) => {
+app.put("/listing/:id/update",
+     validationError,
+     wrapAsync(async (req, res) => {
 
-    if (!req.body.listing) {
-        throw new ExpressError(400, "Bad request");
-    }
-
-    let { id } = req.params;
+let { id } = req.params;
 
     await Listing.findByIdAndUpdate(
         id,
